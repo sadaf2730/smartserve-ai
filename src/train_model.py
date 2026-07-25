@@ -11,7 +11,12 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.pipeline import Pipeline
 
 # Import preprocessing
-from data_preprocessing import load_and_clean_data, get_preprocessing_pipeline, FEATURE_COLUMNS, TARGET_COLUMN
+try:
+    # Try importing assuming root is in path (running app.py or PYTHONPATH=.)
+    from src.data_preprocessing import load_and_clean_data, get_preprocessing_pipeline, FEATURE_COLUMNS, TARGET_COLUMN
+except ModuleNotFoundError:
+    # Try importing assuming src is in path (running train_model.py directly)
+    from data_preprocessing import load_and_clean_data, get_preprocessing_pipeline, FEATURE_COLUMNS, TARGET_COLUMN
 
 def train_and_evaluate(data_path, models_dir):
     """
